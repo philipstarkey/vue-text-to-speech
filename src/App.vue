@@ -1,6 +1,7 @@
 <script setup>
 import { computed, ref, onMounted, watchEffect } from 'vue'
 import { useDark, useScroll, useSpeechSynthesis } from '@vueuse/core'
+import Button from 'primevue/button'
 import Card from 'primevue/card'
 import Dropdown from 'primevue/dropdown'
 import InputText from 'primevue/inputtext'
@@ -145,7 +146,15 @@ const stop = (index) => {
             optionValue="value"
             placeholder="Select a voice"
           />
-          <InputText type="text" v-model="newMessage" @keyup.enter="onNewMessage" />
+          <div class="flex gap-2">
+            <InputText
+              class="flex-grow"
+              type="text"
+              v-model="newMessage"
+              @keyup.enter="onNewMessage"
+            />
+            <Button icon="pi pi-play" aria-label="Play" rounded outlined @click="onNewMessage" />
+          </div>
           <MessageHistory
             :messages="messages"
             :messagePlayingState="messagePlayingState"
