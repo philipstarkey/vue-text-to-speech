@@ -5,6 +5,7 @@ import Button from 'primevue/button'
 import Card from 'primevue/card'
 import Dropdown from 'primevue/dropdown'
 import InputText from 'primevue/inputtext'
+import Slider from 'primevue/slider'
 import ToggleButton from '@/components/ToggleButton.vue'
 import Heading from '@/components/HeadingText.vue'
 import MessageHistory from '@/components/MessageHistory.vue'
@@ -19,7 +20,7 @@ const messageHistory = ref(null)
 const voiceIdx = ref(0)
 const availableVoices = ref([])
 const pitch = ref(1)
-const rate = ref(1)
+const rate = ref(100)
 let synth
 
 // const { y: messageHistoryScrollY } = useScroll(messageHistory)
@@ -29,7 +30,7 @@ const voice = computed(() => availableVoices.value[voiceIdx.value])
 const speech = useSpeechSynthesis(messagePlaying, {
   voice,
   pitch,
-  rate
+  rate: computed(() => rate.value / 100)
 })
 
 onMounted(() => {
@@ -146,6 +147,19 @@ const stop = (index) => {
             optionValue="value"
             placeholder="Select a voice"
           />
+          <!-- <FloatLabel> -->
+          <div class="flex gap-4">
+            <label for="rate">Rate</label>
+            <Slider
+              id="rate"
+              v-model="rate"
+              :min="10"
+              :max="100"
+              :step="5"
+              class="mt-3 flex-grow"
+            />
+          </div>
+          <!-- </FloatLabel> -->
           <div class="flex gap-2">
             <InputText
               class="flex-grow"
