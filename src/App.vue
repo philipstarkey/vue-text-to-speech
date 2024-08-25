@@ -136,7 +136,7 @@ const stop = (index) => {
   </div>
   <Heading class="text-emerald-600 text-center">Text to speech</Heading>
   <div class="flex mt-8">
-    <Card class="m-auto w-2/3">
+    <Card class="m-auto w-11/12 md:w-4/5 lg:w-2/3">
       <template #content>
         <div class="grid grid-cols-1 gap-4 m-auto">
           <Dropdown
